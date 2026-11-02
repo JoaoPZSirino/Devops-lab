@@ -1,6 +1,3 @@
-# ==============================================================================
-# Pipeline CI/CD Básica - Azure DevOps (Free Tier)
-# ==============================================================================
 trigger:
   - main
 
@@ -12,27 +9,26 @@ steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.11'
-    displayName: '1. Configurar Python 3.11'
+    displayName: '1. Configurando Python 3.11'
 
   # 2. Instala os pacotes necessários
   - script: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-    displayName: '2. Instalar Dependências'
+    displayName: '2. Instalando Dependências'
 
   # 3. Executa os testes unitários (CI - Integração Contínua)
   - script: |
       pytest test_app.py -v
-    displayName: '3. Executar Testes Unitários com Pytest'
+    displayName: '3. Executando Testes Unitários com Pytest'
 
+  #CI
   # 4. Constrói e publica a imagem no Docker Hub
   - task: Docker@2
-    displayName: '5. Construir e Publicar no Docker Hub'
+    displayName: '4. Construindo e Publicando no Docker Hub'
     inputs:
       # Container Repository
-      #containerRegistry: # string. Container registry. 
       containerRegistry: 'dockerhub-connection'
-      #repository: # string. Optional. Use when command != login && command != logout && command != start && command != stop. Container repository.       
       repository: 'joaopzsirino/devops-lab'
       # Commands
       command: 'buildAndPush'
@@ -40,3 +36,34 @@ steps:
       tags: |
         $(Build.BuildId)
         latest
+
+  #CD
+  # 5. Instalar o Kubectl
+  - task: KubectlInstaller@0
+    inputs:
+      kubectlVersion: 'latest'
+    displayName: '5. Instalando o Kubectl'
+
+  # 6. Instala o Kind e sobe o cluster
+  - script: |
+      curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.33.0/kind-linux-amd64
+      chmod +x ./kind
+      sudo mv ./kind /usr/local/bin/kind
+
+      kind create cluster --name devops-cluster --config create-cluster.yaml
+    displayName: '6. INstalando o Kind'
+
+  # 7. Aplica o Manifesto do pod
+  - script : |
+
+      kubectl apply -f pod.yaml
+    displayName: '7. Aplicando o manifesto do Pod'
+
+  # 8. Inspeciona Pod e Localização no Cluster
+  - script: |
+      echo "=== Verificando detalhes do Pod no Cluster ==="
+      kubectl get pods -o wide
+      
+      echo "=== Verificando em qual nó (worker) o pod foi alocado ==="
+      kubectl describe pod projeto-devops
+    displayName: '8. Inspecionando Pod e Localização no Cluster'
