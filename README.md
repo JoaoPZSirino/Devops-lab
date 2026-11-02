@@ -44,12 +44,3 @@ Envia o arquivo de manifesto (pod.yaml) para o cluster recém-criado, instancian
 
 8. Inspeção e Validação do Cluster:
 Executa comandos de diagnóstico (kubectl get pods -o wide e kubectl describe pod) para verificar a saúde do Pod, confirmar que ele saiu do estado pendente e identificar exatamente em qual nó worker a aplicação está alocada.
-
-devops-lab/
-├── app.py                # Aplicação Flask principal
-├── test_app.py           # Testes unitários com Pytest
-├── requirements.txt      # Dependências do projeto Python
-├── Dockerfile            # Receita para containerizar a aplicação
-├── create-cluster.yaml   # Configuração do Kind (1 control-plane, 2 workers)
-├── pod.yaml              # Manifesto do Kubernetes para o Pod da aplicação
-└── azure-pipelines.yml   # Definição completa da Pipeline de CI/CD
