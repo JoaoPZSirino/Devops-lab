@@ -1,18 +1,16 @@
-apiVersion: v1 
-kind: Pod 
-metadata: 
-  labels: 
-    run: projeto-devops 
-    service: site
+apiVersion: v1
+kind: Pod
+metadata:
   name: projeto-devops
-spec: 
+  labels:
+    run: projeto-devops
+    service: site
+spec:
   containers:
-    - name: devops-lab 
-      image: joaopzsirino/devops-lab:latest
-      ports:
-        - containerPort: 5000
-  env:
+  - name: devops-lab
+    image: joaopzsirino/devops-lab:latest
+    ports:
+    - containerPort: 5000
+    env:
     - name: CAT_API_KEY
       value: "$(CAT_API_KEY)"
-  dnsPolicy: ClusterFirst 
-  restartPolicy: Always
