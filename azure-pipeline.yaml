@@ -51,6 +51,7 @@ steps:
       sudo mv ./kind /usr/local/bin/kind
 
       kind create cluster --name devops-cluster --config create-cluster.yaml
+      sleep 10
     displayName: '6. INstalando o Kind'
 
   # 7. Aplica o Manifesto do pod
