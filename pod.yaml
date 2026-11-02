@@ -13,6 +13,6 @@ spec:
         - containerPort: 5000
   env:
     - name: CAT_API_KEY
-      value: "$(CAT_API_KEY)"  # O Azure DevOps substitui isso pelo segredo da pipeline automaticamente!
+      value: "$(CAT_API_KEY)"
   dnsPolicy: ClusterFirst 
   restartPolicy: Always
