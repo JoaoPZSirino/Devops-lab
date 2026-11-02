@@ -8,9 +8,6 @@ app = Flask(__name__)
 # Chave da API do TheCatAPI (lida de variável de ambiente)
 CAT_API_KEY = os.getenv("CAT_API_KEY")
 
-# Agora execute seu script ou pytest normalmente
-python app.py
-
 # HTML simples embutido com CSS bonito e botão para gerar novo gatinho
 HTML_TEMPLATE = """
 <!DOCTYPE html>
