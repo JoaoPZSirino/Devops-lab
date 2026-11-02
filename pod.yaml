@@ -11,5 +11,8 @@ spec:
       image: joaopzsirino/devops-lab:latest
       ports:
         - containerPort: 5000
+  env:
+    - name: CAT_API_KEY
+      value: "$(CAT_API_KEY)"  # O Azure DevOps substitui isso pelo segredo da pipeline automaticamente!
   dnsPolicy: ClusterFirst 
   restartPolicy: Always

@@ -5,11 +5,11 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-# Chave da API do TheCatAPI (lida de variável de ambiente ou usa a padrão)
-CAT_API_KEY = os.getenv(
-    "CAT_API_KEY", 
-    "live_3mBOuzn6OEwTxzLBej2ys8C6BG0rvNmuxhjNOvNRxmDysLoH5Rb4OhbZCP0DYsfH"
-)
+# Chave da API do TheCatAPI (lida de variável de ambiente)
+CAT_API_KEY = os.getenv("CAT_API_KEY")
+
+# Agora execute seu script ou pytest normalmente
+python app.py
 
 # HTML simples embutido com CSS bonito e botão para gerar novo gatinho
 HTML_TEMPLATE = """
