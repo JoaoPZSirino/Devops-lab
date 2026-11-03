@@ -101,6 +101,5 @@ def index():
     return render_template_string(HTML_TEMPLATE, image_url=image_url, hostname=hostname)
 
 
-    if __name__ == "__main__":
-        # Roda na porta 5000
-        app.run(host="0.0.0.0", port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
