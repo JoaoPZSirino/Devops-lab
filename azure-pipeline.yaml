@@ -62,6 +62,9 @@ steps:
 
   # 8. Inspeciona Pod e Localização no Cluster
   - script: |
+      echo "=== Verificando se o Pod sobe==="
+      kubectl wait --for=condition=Ready pod/projeto-devops --timeout=120s
+
       echo "=== Verificando detalhes do Pod no Cluster ==="
       kubectl get pods -o wide
       
